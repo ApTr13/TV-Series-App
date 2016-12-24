@@ -1,0 +1,18 @@
+<!-- Page rendering form for Edit Episode i.e UPDATE IN CRUD -->
+{% extends "base.html" %}
+{% block content %}
+
+	<h1 class="text-center">New Episode</h1>
+	<h2 class="text-center">{{series.name}}</h2>
+
+	<div class="col-md-1"></div>
+	<form class="col-md-11" action="#" method="POST">
+		<h3 class="name">Name       : <input type="text" name="name" value="{{episode.name}}"></h3> 
+		<h3 class="name">Description: <input type="text" size='40' name="description" value="{{episode.description}}"></h3> 
+		<h3 class="name">Air-Date   : <input type ='text' name='air_date' value="{{episode.air_date}}"></h3> 
+
+		<input type="submit" name="Edit Episode">
+		<a class="button" href = "{{url_for('showEpisodes',series_id = series.id)}}">Cancel </a>
+	</form>
+
+{% endblock %}

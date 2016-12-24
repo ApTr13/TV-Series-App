@@ -1,0 +1,40 @@
+<!-- Page Rendering all the Series to a public user who isnt logged in i.e READ in CRUD-->
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>TV SERIES</h1>
+	
+	<div class="col-md-3"></div>
+	<div class = 'flash text-center col-md-6'>
+	    {% with messages = get_flashed_messages() %}
+			{% if messages %}    
+				<ul>
+				{% for message in messages %}
+				    <li> <strong> {{ message }} </strong> </li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+	    {% endwith %}
+	</div>
+
+	<div class="col-md-12 animated fadeInRightBig">
+		<h3 class="col-md-10 text-right"><a class="button" href="{{url_for('seriesesJSON')}}">Get JSON</a></h3>
+	</div>
+
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+	{% for series in serieses %}
+		<div class="row series animated fadeInUp">
+			<div class="col-md-1"></div>
+			<div class="col-md-10 series-list">
+				<h3 class="col-md-8" ><a class="name" href="{{url_for('showEpisodes',series_id = series.id)}}">{{series.name}}</a></h3>
+				<h3 class="text-right col-md-4">{{ series.rating }}</h3>
+				<p class="col-md-12">{{ series.actors }}</p>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<br>
+	{% endfor %}
+	</div>
+
+{% endblock %}

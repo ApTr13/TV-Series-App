@@ -1,0 +1,77 @@
+<!-- Login Page that alawys user to login into the app using their FACEBOOK ACCOUNT -->
+{% extends "base.html" %}
+{% block content %}
+
+<h1>LOGIN</h1>
+<br>
+<h3 class="col-md-2"></h3>
+<h3 class="text-center col-md-8 name">Sign-in into the TV Series App using your Facebook ID 
+so that you can create your own series and add episodes to it....</h3>
+
+<!--FACEBOOK SIGN IN -->
+<script>
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1290174137708946',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.2' // use version 2.2
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function sendTokenToServer() {
+    var access_token = FB.getAuthResponse()['accessToken'];
+    console.log(access_token)
+    console.log('Welcome! Fetching your details.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+     
+     $.ajax({
+      type: 'POST',
+      url: '/fbconnect?state={{STATE}}',
+      processData: false,
+      data: access_token,
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         setTimeout(function() {
+          window.location.href = "/series";
+         }, 4000);
+          
+
+      } else {
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         }
+
+      }
+      
+  });
+
+
+    });
+  }
+</script>
+
+<div class="col-md-4"></div>
+<button class="button fb col-md-4 text-center">
+	<fb:login-button size="xlarge" scope="public_profile,email" onlogin="sendTokenToServer(); " width="400px">
+		<a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+	</fb:login-button>
+</button>
+<!--END FACEBOOK SIGN IN -->
+{% endblock %}

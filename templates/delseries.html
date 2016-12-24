@@ -1,0 +1,14 @@
+<!-- Page rendering form for Delete Series i.e DELETE IN CRUD -->
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Delete TV Series</h1>
+
+	<div class="col-md-1"></div>
+	<form class="col-md-10" action="#" method = 'POST'>
+		<h2> Are you sure you want to delete {{series.name}}? </h2>
+		<input type='submit', value = 'Delete'>
+		<a class="button" href = "{{url_for('showSerieses')}}"> Cancel </a>
+	</form>
+
+{% endblock %}

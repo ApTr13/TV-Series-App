@@ -1,0 +1,16 @@
+<!-- Page rendering form for New Series i.e CREATE IN CRUD -->
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>New TV Series</h1>
+	<div class="col-md-3"></div>
+	<form class="col-md-9" action="#" method="POST">
+		<h3 class="name">Name   : <input type="text" name="name"></h3> 
+		<h3 class="name">Ratings: <input type="number" step="0.1" name="rating"></h3> 
+		<h3 class="name">Actors : <input type="text" name="actors"></h3> 
+
+		<input type="submit" name="Add Series">
+		<a class="button" href = "{{url_for('showSerieses')}}"> Cancel </a>
+	</form>
+
+{% endblock %}

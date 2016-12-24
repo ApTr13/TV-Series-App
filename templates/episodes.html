@@ -1,0 +1,44 @@
+<!-- Page Rendering all the Episodes to the user  who has created the given Series i.e READ in CRUD-->
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Episodes - {{series.name}}</h1>
+
+	<div class="col-md-3"></div>
+	<div class = 'flash text-center col-md-6'>
+	    {% with messages = get_flashed_messages() %}
+			{% if messages %}    
+				<ul>
+				{% for message in messages %}
+				    <li> <strong> {{ message }} </strong> </li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+	    {% endwith %}
+	</div>
+	<div class="col-md-12 options">
+		<div class="col-md-1"></div>
+		<h3 class="col-md-5 animated fadeInLeftBig"><a class="button" href="{{url_for('newEpisode',series_id=series.id)}}">Add new Episode</a></h3>
+		<h3 class="col-md-5 text-right animated fadeInRightBig"><a class="button" href="{{url_for('seriesEpisodesJSON',series_id=series.id)}}">Get JSON</a></h3>
+		<div class="col-md-1"></div>
+		<h4 class="col-md-12 text-center" >Created by - {{ creator.name }}</h4>
+	</div>	
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+	{% if items !=[] %}
+		{% for i in episodes %}	
+			<div class="row episodes animated fadeInUp">
+				<div class="col-md-1"></div>
+				<div class="col-md-10 series-list">
+					<h3 class="col-md-8 name" >{{i.name}}</h3>
+					<h3 class="text-right col-md-4">{{i.air_date}}</h3>
+					<p class="col-md-12">{{i.description}}</p>
+					<p class="col-md-6"><a class="button" href = "{{url_for('editEpisode',series_id = series.id, episode_id = i.id)}}">Edit</a> || <a class="button" href = "{{url_for('deleteEpisode',series_id = series.id, episode_id = i.id)}}">Delete</a> || <a class="button" href="{{url_for('episodeJSON',series_id = series.id, episode_id = i.id)}}">JSON</a> </p>
+				</div>
+			</div>
+			<br>
+		{% endfor %}
+	{% endif %}
+	</div>
+
+{% endblock %}

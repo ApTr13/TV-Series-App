@@ -1,0 +1,39 @@
+<!-- Base Page that renders Header data for every page in APP  -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TV SERIES APP</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+	</script>
+	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='animate.css') }}">
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-6 animated fadeInLeftBig">
+			<h3 class="col-md-12 top_column">
+				<a class="button" href="{{url_for('showSerieses')}}">Show All Series</a>
+			</h3>
+		</div>
+		<div class="col-md-6 text-right animated fadeInRightBig">
+				{%if 'username' not in session %}
+				<h3 class="col-md-12 top_column"><a class="button" href="{{url_for('showLogin')}}">Login </a></h3>
+				{% else %}
+				<h3 class="col-md-8 "><span><a target="_blank" href="https://www.facebook.com/?id={{session.facebook_id}}">{{session.username}}</a></span><img src="{{session.picture}}" class="profilepic"> </h3>
+				<h3 class="col-md-4 top_column"><a class="button" href="{{url_for('fbdisconnect')}}">Logout </a></h3>
+				{% endif %}
+		</div>
+		<div class="col-md-12 text-center animated fadeInDownBig">
+			<div class="col-md-2"></div>
+			<img src="http://kusaka.co/wordpress/wp-content/uploads/2016/03/TVShows-cover_71-w-copr.jpg" class="banner col-md-8" >
+		</div>
+
+		<div class="col-md-12 main_block">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>
+</body>
+</html>
