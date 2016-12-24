@@ -8,7 +8,7 @@ Users can sign in using their Facebook ID and add,edit,delete new series and the
 ###Contents
 1. **db_setup.py** - Database setup module for creating database of the Application...
 2. **lotsofseries.py** - A py module for populating "series.db", adding several series with episodes...
-3. **finalproject.py** - Flask Project file for the TV Series Application that runs the application on local server
+3. **project.py** - Flask Project file for the TV Series Application that runs the application on local server
 4. **db_setup.pyc** - Pre-complied version of db_setup.py
 5. **templates** - A folder containing all .html files to be rendered in app
 6. **static** - A folder containing all css and jpg files used in app
@@ -46,8 +46,8 @@ Now fork and clone [fullstack-nanodegree-vm repository](https://github.com/udaci
 9. Now we need to add some data to our database. so run the **lotsofseries.py** file
 > python lotsofseries.py
 
-10. Final step up is to complie the **finalproject.py** which runs a flask environment for our Web Application
-> python finalproject.py
+10. Final step up is to complie the **project.py** which runs a flask environment for our Web Application
+> python project.py
 
 Voila :D....
 Now you can see the series and episodes pre-added by **Mr.Popo**...
